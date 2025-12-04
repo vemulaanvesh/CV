@@ -1,14 +1,11 @@
 /* =================================
 ------------------------------------
-	Civic - CV Resume
-	Version: 1.0
+	Anvesh Vemula - CV Resume
+	Updated: December 2024
  ------------------------------------
  ====================================*/
 
-
-
 'use strict';
-
 
 $(window).on('load', function() {
 	/*------------------
@@ -16,13 +13,7 @@ $(window).on('load', function() {
 	--------------------*/
 	$(".loader").fadeOut();
 	$("#preloder").delay(400).fadeOut("slow");
-	// setTimeout(function () {
-	// 	$("#my_audio").get(0).play();
-	// 	document.getElementById("my_audio").play();
-	// }, 5000);
-
 });
-
 
 (function($) {
 
@@ -34,7 +25,9 @@ $(window).on('load', function() {
 		$(this).css('background-image', 'url(' + bg + ')');
 	});
 
-
+	/*------------------
+		Review Slider
+	--------------------*/
 	$('.review-slider').owlCarousel({
 		loop: true,
 		nav: false,
@@ -43,8 +36,9 @@ $(window).on('load', function() {
 		autoplay: true
 	});
 
-
-
+	/*------------------
+		Progress Bars
+	--------------------*/
 	$('.progress-bar-style').each(function() {
 		var progress = $(this).data("progress");
 		var prog_width = progress + '%';
@@ -56,7 +50,9 @@ $(window).on('load', function() {
 		}
 	});
 
-
+	/*------------------
+		Language Progress
+	--------------------*/
 	$('.lan-prog').each(function() {
 		var progress = $(this).data("lanprogesss");
 		var ele      = '<span></span>';
@@ -71,116 +67,127 @@ $(window).on('load', function() {
 		}
 	});
 
-
 	/*------------------
-		Popup
+		Popup - Only for image links
 	--------------------*/
-	$('.portfolio-item .port-pic').magnificPopup({
+	$('.portfolio-item .port-pic[href$=".jpg"], .portfolio-item .port-pic[href$=".png"]').magnificPopup({
 		type: 'image',
 		mainClass: 'img-popup-warp',
 		removalDelay: 500,
 	});
 
+	/*------------------
+		Circle Progress - Updated Skills
+	--------------------*/
+	if($().circleProgress){
+		
+		// Modern gradient color for progress circles
+		var gradientFill = {
+			gradient: ['#06b6d4', '#3b82f6', '#8b5cf6'],
+			gradientAngle: Math.PI / 4
+		};
 
+		// Kubernetes & Helm - 95%
+		$("#progress1").circleProgress({
+			value: 0.95,
+			size: 175,
+			thickness: 3,
+			fill: gradientFill,
+			emptyFill: "rgba(0, 0, 0, 0.05)"
+		});
 
+		// Terraform & IaC - 92%
+		$("#progress2").circleProgress({
+			value: 0.92,
+			size: 175,
+			thickness: 3,
+			fill: gradientFill,
+			emptyFill: "rgba(0, 0, 0, 0.05)"
+		});
 
-if($().circleProgress){
+		// CI/CD Pipelines - 90%
+		$("#progress3").circleProgress({
+			value: 0.90,
+			size: 175,
+			thickness: 3,
+			fill: gradientFill,
+			emptyFill: "rgba(0, 0, 0, 0.05)"
+		});
 
-	//Set progress circle 1
-	$("#progress1").circleProgress({
-		value: 0.80,
-		size: 175,
-		thickness: 2,
-		fill: "#40424a",
-		emptyFill: "rgba(0, 0, 0, 0)"
-	});
-	//Set progress circle 2
-	$("#progress2").circleProgress({
-		value: 0.75,
-		size: 175,
-		thickness: 2,
-		fill: "#40424a",
-		emptyFill: "rgba(0, 0, 0, 0)"
+		// GCP & Azure - 93%
+		$("#progress4").circleProgress({
+			value: 0.93,
+			size: 175,
+			thickness: 3,
+			fill: gradientFill,
+			emptyFill: "rgba(0, 0, 0, 0.05)"
+		});
+
+		// Security & Vault - 88%
+		$("#progress5").circleProgress({
+			value: 0.88,
+			size: 175,
+			thickness: 3,
+			fill: gradientFill,
+			emptyFill: "rgba(0, 0, 0, 0.05)"
+		});
+
+		// Monitoring - 90%
+		$("#progress6").circleProgress({
+			value: 0.90,
+			size: 175,
+			thickness: 3,
+			fill: gradientFill,
+			emptyFill: "rgba(0, 0, 0, 0.05)"
+		});
+
+		// Shell & Scripting - 85%
+		$("#progress7").circleProgress({
+			value: 0.85,
+			size: 175,
+			thickness: 3,
+			fill: gradientFill,
+			emptyFill: "rgba(0, 0, 0, 0.05)"
+		});
+
+		// Google Anthos - 87%
+		$("#progress8").circleProgress({
+			value: 0.87,
+			size: 175,
+			thickness: 3,
+			fill: gradientFill,
+			emptyFill: "rgba(0, 0, 0, 0.05)"
+		});
+	}
+
+	/*------------------
+		Smooth Scroll for Navigation Links
+	--------------------*/
+	$('a[href^="#"]').on('click', function(e) {
+		var target = $(this.getAttribute('href'));
+		if(target.length) {
+			e.preventDefault();
+			$('html, body').stop().animate({
+				scrollTop: target.offset().top - 80
+			}, 800);
+		}
 	});
 
-	$("#progress3").circleProgress({
-		value: 0.83,
-		size: 175,
-		thickness: 2,
-		fill: "#40424a",
-		emptyFill: "rgba(0, 0, 0, 0)"
+	/*------------------
+		Scroll Animation for Elements
+	--------------------*/
+	$(window).scroll(function() {
+		var scrollPos = $(window).scrollTop();
+		
+		// Add animation class to elements in viewport
+		$('.tool-category, .expertise-card, .portfolio-item').each(function() {
+			var elementTop = $(this).offset().top;
+			var windowHeight = $(window).height();
+			
+			if (scrollPos > elementTop - windowHeight + 100) {
+				$(this).addClass('animate-fade-in-up');
+			}
+		});
 	});
-
-	$("#progress4").circleProgress({
-		value: 0.90,
-		size: 175,
-		thickness: 2,
-		fill: "#40424a",
-		emptyFill: "rgba(0, 0, 0, 0)"
-	});
-	$("#progress5").circleProgress({
-		value: 0.65,
-		size: 175,
-		thickness: 2,
-		fill: "#40424a",
-		emptyFill: "rgba(0, 0, 0, 0)"
-	});
-	$("#progress6").circleProgress({
-		value: 0.87,
-		size: 175,
-		thickness: 2,
-		fill: "#40424a",
-		emptyFill: "rgba(0, 0, 0, 0)"
-	});
-	$("#progress7").circleProgress({
-		value: 0.86,
-		size: 175,
-		thickness: 2,
-		fill: "#40424a",
-		emptyFill: "rgba(0, 0, 0, 0)"
-	});
-	$("#progress8").circleProgress({
-		value: 0.73,
-		size: 175,
-		thickness: 2,
-		fill: "#40424a",
-		emptyFill: "rgba(0, 0, 0, 0)"
-	});
-	//Set progress circle white
-	// $("#progress3").circleProgress({
-	// 	value: 0.75,
-	// 	size: 175,
-	// 	thickness: 2,
-	// 	fill: "#ffffff",
-	// 	emptyFill: "rgba(0, 0, 0, 0)"
-	// });
-	//
-	// //Set progress circle white
-	// $("#progress4").circleProgress({
-	// 	value: 0.83,
-	// 	size: 175,
-	// 	thickness: 2,
-	// 	fill: "#ffffff",
-	// 	emptyFill: "rgba(0, 0, 0, 0)"
-	// });
-	//
-	// //Set progress circle skyblue
-	// $("#progress5").circleProgress({
-	// 	value: 0.75,
-	// 	size: 175,
-	// 	thickness: 2,
-	// 	fill: "#009fff",
-	// 	emptyFill: "rgba(0, 0, 0, 0)"
-	// });
-
-	//Set progress circle skyblue
-}
-$("#progress11").circleProgress({
-	value: 0.83,
-	size: 175,
-	thickness: 2,
-	fill: "#009fff",
-	emptyFill: "rgba(0, 0, 0, 0)"
-});
 
 })(jQuery);
